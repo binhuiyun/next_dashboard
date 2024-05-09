@@ -1,16 +1,24 @@
 "use client";
 
-import { AuthBindings, GitHubBanner, Refine } from "@refinedev/core";
+import {  AuthProvider, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import { RefineSnackbarProvider, notificationProvider } from "@refinedev/mui";
+import { RefineSnackbarProvider, useNotificationProvider } from "@refinedev/mui";
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
+import dataProvider from "@refinedev/simple-rest";
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from '@mui/icons-material'
 
 import routerProvider from "@refinedev/nextjs-router";
 
 import { ColorModeContextProvider } from "@contexts/color-mode";
-import { dataProvider } from "@providers/data-provider";
+
 
 type RefineContextProps = {
   defaultMode?: string;
@@ -38,7 +46,7 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
     return <span>loading...</span>;
   }
 
-  const authProvider: AuthBindings = {
+  const authProvider:  AuthProvider= {
     login: async () => {
       signIn("google", {
         callbackUrl: to ? to.toString() : "/",
@@ -87,10 +95,12 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
     },
     getIdentity: async () => {
       if (data?.user) {
-        const { user } = data;
+         const { user } = data;
         return {
           name: user.name,
           avatar: user.image,
+          email: user.email,
+        
         };
       }
 
@@ -102,36 +112,52 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
 
   return (
     <>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider defaultMode={defaultMode}>
           <RefineSnackbarProvider>
             <Refine
               routerProvider={routerProvider}
-              dataProvider={dataProvider}
-              notificationProvider={notificationProvider}
+              dataProvider={dataProvider("http://localhost:3000/api")}
+              notificationProvider={useNotificationProvider}
               authProvider={authProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "dashboard",
+                  list: "/",
                   meta: {
-                    canDelete: true,
-                  },
+                    icon: <StarOutlineRounded />
+                  }
                 },
                 {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
+                  name: "properties",
+                  list: "/properties",
+                  create: "/properties/create",
+                  edit: "/properties/edit/:id",
+                  show: "/properties/show/:id",
                   meta: {
-                    canDelete: true,
-                  },
+                    icon: <VillaOutlined />
+                  }
                 },
+                {
+                  name: "agents",
+                  list: "/agents",
+                  show: "/agents/show/:id",
+                  meta: {
+                    icon: <PeopleAltOutlined />
+                  }
+
+                },
+                {
+                  name: "my-profile",
+                  options: {label: "My Profile"},
+                  list: "/my-profile",
+                  meta:{
+                    icon: <AccountCircleOutlined />
+                  }
+                },
+           
+          
+            
               ]}
               options={{
                 syncWithLocation: true,

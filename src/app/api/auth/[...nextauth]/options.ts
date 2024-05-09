@@ -1,15 +1,47 @@
 import GoogleProvider from "next-auth/providers/google";
+import User from '@models/user';
+import { connectToDB } from '@utils/database';
 
 const authOptions = {
   // Configure one or more authentication providers
   providers: [
-    // !!! Should be stored in .env file.
     GoogleProvider({
-      clientId: `1041339102270-e1fpe2b6v6u1didfndh7jkjmpcashs4f.apps.googleusercontent.com`,
-      clientSecret: `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`,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  secret: `UItTuD1HcGXIj8ZfHUswhYdNd40Lc325R8VlxQPUoR0=`,
-};
+  callbacks: {
+    async session({ session }) {
+      // store the user id from MongoDB to session
+      const sessionUser = await User.findOne({ email: session.user.email });
+      session.user.id = sessionUser._id.toString();
+
+      return session;
+    },
+    async signIn({ profile }) {
+      try {
+        await connectToDB();
+
+        // check if user already exists
+        const userExists = await User.findOne({ email: profile.email });
+
+        // if not, create a new document and save user in MongoDB
+        if (!userExists) {
+          await User.create({
+            email: profile.email,
+            name: profile.name,
+            avatar: profile.image,
+          });
+        }
+
+        return true
+      } catch (error) {
+        console.log("Error checking if user exists: ", error.message);
+        return false
+      }
+    },
+  },
+}
+
 
 export default authOptions;
