@@ -119,7 +119,7 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
           <RefineSnackbarProvider>
             <Refine
               routerProvider={routerProvider}
-              dataProvider={dataProvider("http://localhost:3000/api")}
+              dataProvider={dataProvider("https://next-js-dashboard-refine.vercel.app/api")}
               notificationProvider={useNotificationProvider}
               authProvider={authProvider}
               resources={[
