@@ -2,7 +2,7 @@ import User from '@models/user';
 import { connectToDB } from '@utils/database';
 
 
-export const GET = async ({ params }: { params: any }) => {
+export const GET = async (req: Request, { params }: { params: any }) => {
   try {
     await connectToDB();
     const user = await User.findById(params.id).populate('allProperties');

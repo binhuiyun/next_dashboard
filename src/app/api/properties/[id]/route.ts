@@ -12,7 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const GET = async ({params}: {params: any}) => {
+export const GET = async (req: Request, {params}: {params: any}) => {
   await connectToDB();
   const propertyExists = await Property.findOne({ _id: params.id}).populate(
     "creator"
@@ -48,7 +48,7 @@ export const PATCH = async (req: Request,{params}:  {params: any}) => {
   }
 };
 
-export const DELETE = async ({params}:  {params: any}) => {
+export const DELETE = async (req: Request, {params}:  {params: any}) => {
  
   try {
     await connectToDB();
