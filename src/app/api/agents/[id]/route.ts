@@ -2,7 +2,7 @@ import User from '@models/user';
 import { connectToDB } from '@utils/database';
 
 
-export const GET = async (req, {params}) => {
+export const GET = async ({ params }: { params: any }) => {
   try {
     await connectToDB();
     const user = await User.findById(params.id).populate('allProperties');
@@ -13,7 +13,7 @@ export const GET = async (req, {params}) => {
         return new Response('User not found', {status:404});
       
       }
-    } catch (error) {
+    } catch (error: any) {
         return new Response(error.message, {status:500});
   
     }

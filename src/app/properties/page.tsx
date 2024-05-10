@@ -15,6 +15,7 @@ import { useMemo } from "react";
 
 import { PropertyCard, CustomButton } from "@components";
 
+
 const AllProperties = () => {
   const router = useRouter();
   const {

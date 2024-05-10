@@ -2,7 +2,6 @@ import Property from "@models/property";
 import { connectToDB } from "@utils/database";
 import mongoose from "mongoose";
 import User from "@models/user";
-import { NextApiResponse } from "next";
 
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
@@ -20,11 +19,11 @@ interface SortOptions {
   [key: string]: SortOrder;
 }
 
-export const GET = async (req, res: NextApiResponse) => {
+export const GET = async (req: Request) => {
   //req.query is undefined, so here using URLSearchParams
   const { searchParams } = new URL(req.url);
-  const _start = parseInt(searchParams.get("_start")) || 0;
-  const _end = parseInt(searchParams.get("_end")) || 10;
+  const _start =searchParams.get("_start") || 0;
+  const _end = searchParams.get("_end")|| 10;
   const _sort = searchParams.get("_sort") || "";
   const _order = searchParams.get("_order") || "";
 
@@ -48,8 +47,8 @@ export const GET = async (req, res: NextApiResponse) => {
     const count = await Property.countDocuments(query);
     //  console.log("count............",count);
     const properties = await Property.find(query)
-      .limit(_end)
-      .skip(_start)
+      .limit(+_end)
+      .skip(+_start)
       .sort(sortOptions);
 
     //  res.header('X-Total-Count', count.toString());
@@ -61,7 +60,7 @@ export const GET = async (req, res: NextApiResponse) => {
   }
 };
 
-export const POST = async (req) => {
+export const POST = async (req: Request) => {
   const { title, description, price, propertyType, location, photo, email } =
     await req.json();
   try {

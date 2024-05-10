@@ -12,7 +12,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const GET = async (req, {params}) => {
+export const GET = async ({params}: {params: any}) => {
   await connectToDB();
   const propertyExists = await Property.findOne({ _id: params.id}).populate(
     "creator"
@@ -21,11 +21,11 @@ export const GET = async (req, {params}) => {
   if (propertyExists) {
     return new Response(JSON.stringify(propertyExists), { status: 200 });
   } else {
-    return new Response(error.message, { status: 500 });
+    return new Response("porperty does not exist", { status: 500 });
   }
 };
 
-export const PATCH = async (req,{params}) => {
+export const PATCH = async (req: Request,{params}:  {params: any}) => {
 
   const { title, description, price, propertyType, location, photo } = await req.json();
   try {
@@ -43,12 +43,12 @@ export const PATCH = async (req,{params}) => {
       }
     );
     return new Response("Property updated", { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }
 };
 
-export const DELETE = async (req, {params}) => {
+export const DELETE = async ({params}:  {params: any}) => {
  
   try {
     await connectToDB();
@@ -61,9 +61,9 @@ export const DELETE = async (req, {params}) => {
 
     properyToDelete.creator.allProperties.pull(properyToDelete);
     await properyToDelete.creator.save();
-    console.log("delete=====================");
+  //  console.log("delete=====================");
     return new Response("Property deleted", { status: 200 });
-  } catch (error) {
+  } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }
 };
