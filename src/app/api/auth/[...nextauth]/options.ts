@@ -19,6 +19,7 @@ const authOptions = {
       return session;
     },
     async signIn({ profile }: { profile: any  }) {
+      console.log("Sign in profile: ", profile);
       try {
         await connectToDB();
 
@@ -27,10 +28,11 @@ const authOptions = {
 
         // if not, create a new document and save user in MongoDB
         if (!userExists) {
+          console.log("User does not exist, creating new user...");
           await User.create({
             email: profile.email,
             name: profile.name,
-            avatar: profile.image,
+            avatar: profile.picture,
           });
         }
 
