@@ -6,19 +6,19 @@ const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID || '',
+      clientSecret: process.env.GOOGLE_SECRET || '',
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session }: { session: any }) {
       // store the user id from MongoDB to session
       const sessionUser = await User.findOne({ email: session.user.email });
       session.user.id = sessionUser._id.toString();
 
       return session;
     },
-    async signIn({ profile }) {
+    async signIn({ profile }: { profile: any  }) {
       try {
         await connectToDB();
 
@@ -35,7 +35,7 @@ const authOptions = {
         }
 
         return true
-      } catch (error) {
+      } catch (error:any) {
         console.log("Error checking if user exists: ", error.message);
         return false
       }
