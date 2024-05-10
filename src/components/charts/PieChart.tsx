@@ -1,11 +1,14 @@
 'use client';
 
-import ReactApexChart from 'react-apexcharts';
 import { Box, Typography, Stack } from '@mui/material';
 
 import { PieChartProps } from '@interfaces/home'
+import dynamic from 'next/dynamic';
+
+const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const PieChart = ({ title, value, series, colors }: PieChartProps) => {
+  
   return (
     <Box
       id="chart"
@@ -27,7 +30,7 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
         <Typography fontSize={24} color="#11142d" fontWeight={700} mt={1}>{value}</Typography>
       </Stack>
 
-      <ReactApexChart 
+      <ApexChart 
         options={{
           chart: { type: 'donut' },
           colors,
@@ -37,6 +40,7 @@ const PieChart = ({ title, value, series, colors }: PieChartProps) => {
         series={series}
         type="donut"
         width="120px"
+        height="120px"
       />
     </Box>
   )
