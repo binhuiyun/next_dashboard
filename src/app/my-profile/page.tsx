@@ -1,15 +1,18 @@
 "use client";
 
-import {useOne} from "@refinedev/core";
+import {useGetIdentity, useOne} from "@refinedev/core";
 import { Profile } from '@components';
-import {useSession } from "next-auth/react";
+
 
 const MyProfile = () => {
-  const {data: session} = useSession();
+
+ const {data: user} = useGetIdentity();
+ console.log("profile user", user);
+  
 
   const { data, isLoading, isError } = useOne({
     resource: "agents",
-    id: session?.user?.id,
+    id: user?.id,
 })
   console.log("data", data?.data);
 

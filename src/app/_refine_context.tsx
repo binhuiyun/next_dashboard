@@ -99,6 +99,8 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
           name: user.name,
           avatar: user.image,
           email: user.email,
+          id: user.id,
+          
         
         };
       }

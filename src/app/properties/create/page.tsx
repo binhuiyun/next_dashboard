@@ -9,6 +9,7 @@ import Form from '@components/common/Form';
 
 const CreateProperty = () => {
   const { data: user } = useGetIdentity();
+  console.log("user", user);
   const [propertyImage, setPropertyImage] = useState({ name: '', url: '' });
   const { refineCore: { onFinish, formLoading }, register, handleSubmit } = useForm();
 
