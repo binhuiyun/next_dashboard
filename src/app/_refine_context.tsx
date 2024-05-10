@@ -9,9 +9,8 @@ import React from "react";
 import dataProvider from "@refinedev/simple-rest";
 import {
   AccountCircleOutlined,
-  ChatBubbleOutline,
+  DashboardOutlined,
   PeopleAltOutlined,
-  StarOutlineRounded,
   VillaOutlined,
 } from '@mui/icons-material'
 
@@ -114,6 +113,7 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
     <>
       <RefineKbarProvider>
         <ColorModeContextProvider defaultMode={defaultMode}>
+    
           <RefineSnackbarProvider>
             <Refine
               routerProvider={routerProvider}
@@ -123,9 +123,10 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
               resources={[
                 {
                   name: "dashboard",
+                  options: {label: "Dashboard"},
                   list: "/",
                   meta: {
-                    icon: <StarOutlineRounded />
+                    icon: <DashboardOutlined/>
                   }
                 },
                 {

@@ -21,21 +21,22 @@ const AllProperties = () => {
     tableQueryResult: { data, isLoading, isError },
    current,
    setCurrent,
-   setPageSize,
-   pageCount,
-   sorter,
-   setSorter,
+   setPageSize,   
+   sorters,
+   setSorters,
    filters,
    setFilters,
   } = useTable();
 
   const allProperties = data?.data?.properties ?? [];
 
- // const currentPrice = sorter.find((item) => item.field === "price")?.order;
+  const count = data?.data?.count;
+  const pageCount = Math.ceil(count / 10) || 1;
+  const currentPrice = sorters.find((item) => item.field === "price")?.order;
   console.log("all properties", data?.data);
 
   const toggleSort = (field: string) => {
-    setSorter([{ field, order: currentPrice === "asc" ? "desc" : "asc" }]);
+    setSorters([{ field, order: currentPrice === "asc" ? "desc" : "asc" }]);
   };
 
   const currentFilterValues = useMemo(() => {
@@ -79,9 +80,8 @@ const AllProperties = () => {
               mb={{ xs: "20px", sm: 0 }}
             >
               <CustomButton
-              title= "Sort price"
-              //  title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
-             //   handleClick={() => toggleSort("price")}
+               title={`Sort price ${currentPrice === "asc" ? "↑" : "↓"}`}
+               handleClick={() => toggleSort("price")}
                 backgroundColor="#475be8"
                 color="#fcfcfc"
               />

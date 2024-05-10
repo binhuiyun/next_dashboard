@@ -24,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Suspense>
-          <RefineContext defaultMode={defaultMode}>{children}</RefineContext>
+          <RefineContext defaultMode={defaultMode}>
+             {children}
+        
+        </RefineContext>
         </Suspense>
       </body>
     </html>
