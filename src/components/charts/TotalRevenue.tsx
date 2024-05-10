@@ -1,3 +1,5 @@
+'use client';
+
 import ReactApexChart from 'react-apexcharts';
 import { Box, Typography, Stack } from '@mui/material';
 import { ArrowCircleUpRounded } from '@mui/icons-material';
