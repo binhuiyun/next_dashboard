@@ -2,7 +2,7 @@ import Property from "@models/property";
 import { connectToDB } from "@utils/database";
 import mongoose from "mongoose";
 import User from "@models/user";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
