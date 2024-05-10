@@ -40,6 +40,8 @@ type AppProps = {
 const App = (props: React.PropsWithChildren<AppProps>) => {
   const { data, status } = useSession();
   const to = usePathname();
+ // const BASE_URL = "https://next-js-dashboard-refine.vercel.app/api";
+  const BASE_URL = "http://localhost:3000/api";
 
   if (status === "loading") {
     return <span>loading...</span>;
@@ -47,10 +49,12 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
 
   const authProvider:  AuthProvider= {
     login: async () => {
-      signIn("google", {
+      signIn("google",
+       {
         callbackUrl: to ? to.toString() : "/",
         redirect: true,
-      });
+      }
+      );
 
       return {
         success: true,
@@ -119,14 +123,14 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
           <RefineSnackbarProvider>
             <Refine
               routerProvider={routerProvider}
-              dataProvider={dataProvider("https://next-js-dashboard-refine.vercel.app/api")}
+              dataProvider={dataProvider(BASE_URL)}
               notificationProvider={useNotificationProvider}
               authProvider={authProvider}
               resources={[
                 {
                   name: "dashboard",
                   options: {label: "Dashboard"},
-                  list: "/",
+                  list: "/home",
                   meta: {
                     icon: <DashboardOutlined/>
                   }
