@@ -24,6 +24,7 @@ const authOptions = {
 
         // check if user already exists
         const userExists = await User.findOne({ email: profile.email });
+        console.log("User exists: ", userExists);
 
         // if not, create a new document and save user in MongoDB
         if (!userExists) {
