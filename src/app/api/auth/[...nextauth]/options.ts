@@ -19,7 +19,6 @@ const authOptions = {
       return session;
     },
     async signIn({ profile }: { profile: any  }) {
-      console.log("Sign in profile: ", profile);
       try {
         await connectToDB();
 

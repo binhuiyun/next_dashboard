@@ -46,15 +46,15 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
   if (status === "loading") {
     return <span>loading...</span>;
   }
-
-  const authProvider:  AuthProvider= {
+  console.log("loading...", status);
+  const authProvider:  AuthProvider= {  
     login: async () => {
-     // console.log("login with google", to);
+  
       signIn("google",
-      //  {
-      //   callbackUrl: to ? to.toString() : "/",
-      //   redirect: true,
-      // }
+       {
+       // callbackUrl: to ? to.toString() : "/home",
+        redirect: true,
+      }
    
       );
 
@@ -106,7 +106,6 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
           avatar: user.image,
           email: user.email,
           id: user.id,
-          
         
         };
       }
