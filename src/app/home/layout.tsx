@@ -7,9 +7,9 @@ import React from "react";
 export default async function Layout({ children }: React.PropsWithChildren) {
   const data = await getData();
 
-  // if (!data.session?.user) {
-  //   return redirect("/login");
-  // }
+  if (!data.session?.user) {
+    return redirect("/login");
+  }
 
   return <ThemedLayout>{children}</ThemedLayout>;
 }

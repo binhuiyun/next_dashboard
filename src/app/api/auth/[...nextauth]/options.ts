@@ -6,10 +6,11 @@ const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
-    }),
+      clientId: `${process.env.GOOGLE_ID}`,
+      clientSecret: `${process.env.GOOGLE_SECRET}`,
+    }),   
   ],
+  secret: `${process.env.NEXTAUTH_SECRET}`,
   callbacks: {
     async session({ session }: { session: any }) {
       // store the user id from MongoDB to session
@@ -24,8 +25,6 @@ const authOptions = {
 
         // check if user already exists
         const userExists = await User.findOne({ email: profile.email });
-        console.log("User exists: ", userExists);
-
         // if not, create a new document and save user in MongoDB
         if (!userExists) {
           console.log("User does not exist, creating new user...");

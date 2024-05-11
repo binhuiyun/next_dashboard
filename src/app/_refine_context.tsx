@@ -1,6 +1,6 @@
 "use client";
 
-import {  AuthProvider, Refine } from "@refinedev/core";
+import { AuthProvider, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { RefineSnackbarProvider, useNotificationProvider } from "@refinedev/mui";
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
@@ -17,6 +17,7 @@ import {
 import routerProvider from "@refinedev/nextjs-router";
 
 import { ColorModeContextProvider } from "@contexts/color-mode";
+
 
 
 type RefineContextProps = {
@@ -41,7 +42,7 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
   const { data, status } = useSession();
   const to = usePathname();
   const BASE_URL = "/api";
-//  const BASE_URL = "http://localhost:3000/api";
+// const BASE_URL = "http://localhost:3000/api";
 
   if (status === "loading") {
     return <span>loading...</span>;
@@ -49,10 +50,9 @@ const App = (props: React.PropsWithChildren<AppProps>) => {
   console.log("loading...", status);
   const authProvider:  AuthProvider= {  
     login: async () => {
-  
       signIn("google",
        {
-       // callbackUrl: to ? to.toString() : "/home",
+        callbackUrl: to ? to.toString() : "/",
         redirect: true,
       }
    
