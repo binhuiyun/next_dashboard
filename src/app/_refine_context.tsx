@@ -40,8 +40,8 @@ type AppProps = {
 const App = (props: React.PropsWithChildren<AppProps>) => {
   const { data, status } = useSession();
   const to = usePathname();
-  //const BASE_URL = "https://next-js-dashboard-refine.vercel.app/api";
-  const BASE_URL = "http://localhost:3000/api";
+  const BASE_URL = "next-dashboard-mu-brown.vercel.app/api";
+  //const BASE_URL = "http://localhost:3000/api";
 
   if (status === "loading") {
     return <span>loading...</span>;
