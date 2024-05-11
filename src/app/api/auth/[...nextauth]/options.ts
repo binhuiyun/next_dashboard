@@ -11,37 +11,37 @@ const authOptions = {
     }),   
   ],
   secret: `${process.env.NEXTAUTH_SECRET}`,
-  callbacks: {
-    async session({ session }: { session: any }) {
-      // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
+  // callbacks: {
+  //   async session({ session }: { session: any }) {
+  //     // store the user id from MongoDB to session
+  //     const sessionUser = await User.findOne({ email: session.user.email });
+  //     session.user.id = sessionUser._id.toString();
 
-      return session;
-    },
-    async signIn({ profile }: { profile: any  }) {
-      try {
-        await connectToDB();
+  //     return session;
+  //   },
+  //   async signIn({ profile }: { profile: any  }) {
+  //     try {
+  //       await connectToDB();
 
-        // check if user already exists
-        const userExists = await User.findOne({ email: profile.email });
-        // if not, create a new document and save user in MongoDB
-        if (!userExists) {
-          console.log("User does not exist, creating new user...");
-          await User.create({
-            email: profile.email,
-            name: profile.name,
-            avatar: profile.picture,
-          });
-        }
+  //       // check if user already exists
+  //       const userExists = await User.findOne({ email: profile.email });
+  //       // if not, create a new document and save user in MongoDB
+  //       if (!userExists) {
+  //         console.log("User does not exist, creating new user...");
+  //         await User.create({
+  //           email: profile.email,
+  //           name: profile.name,
+  //           avatar: profile.picture,
+  //         });
+  //       }
 
-        return true
-      } catch (error:any) {
-        console.log("Error checking if user exists: ", error.message);
-        return false
-      }
-    },
-  },
+  //       return true
+  //     } catch (error:any) {
+  //       console.log("Error checking if user exists: ", error.message);
+  //       return false
+  //     }
+  //   },
+  // },
 }
 
 

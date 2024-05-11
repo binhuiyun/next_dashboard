@@ -12,7 +12,7 @@ const MyProfile = () => {
 
   const { data, isLoading, isError } = useOne({
     resource: "agents",
-    id: user?.id,
+    id: user?.email,
 })
   console.log("data", data?.data);
 
