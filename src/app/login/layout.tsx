@@ -14,7 +14,6 @@ export default async function LoginLayout({
     return redirect("/");
   }
    
-
   return <>{children}</>;
 }
 
