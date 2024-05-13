@@ -15,8 +15,6 @@ https://nextjs-demo-claire.vercel.app
 
 ## <a name="features">🔋 Features</a>
 
-👉 **Modern Design with Glassmorphism Trend Style**: A modern and visually appealing design, incorporating the glassmorphism trend style for a sleek and contemporary appearance.
-
 👉 **Home Page**: Showcases charts for key metrics and latest properites.
 
 👉 **Properties Page**: Allow users to search for properties based on property types, title and sort by price combined with pagination.
