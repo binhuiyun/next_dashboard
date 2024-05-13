@@ -1,6 +1,6 @@
 # Real-estate
 https://project-next-14-ai-prompt-sharing-ashen.vercel.app/
-![Refine Dashboard](utils/nextjs.png)
+![Refine Dashboard](src/utils/nextjs.png)
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
