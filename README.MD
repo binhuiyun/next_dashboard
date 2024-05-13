@@ -1,4 +1,4 @@
-# Real-estate-a Full Stack MERN Dashboard App With CRUD, Auth, and Charts Using Refine
+# A Full Stack Dashboard App With Next.js,CRUD, Auth, and Charts Using Refine
 https://nextjs-demo-claire.vercel.app
 ![Refine Dashboard](src/utils/nextjs.png)
 
@@ -10,7 +10,8 @@ https://nextjs-demo-claire.vercel.app
 - Material UI
 - TypeScript
 - Refine
-- Cloudinary 
+- Cloudinary
+- React Apexcharts
 
 ## <a name="features">🔋 Features</a>
 
