@@ -1,11 +1,6 @@
-# eq_apartments
+# Real-estate
 https://project-next-14-ai-prompt-sharing-ashen.vercel.app/
-
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
+![Refine Dashboard](utils/nextjs.png)
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
