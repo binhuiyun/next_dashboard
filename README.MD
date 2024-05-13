@@ -31,7 +31,7 @@ https://nextjs-demo-claire.vercel.app
 
 👉 **Responsive Website**: Develop a fully responsive website to ensure optimal user experience across various devices, from desktops to smartphones
 
-👉 **image management**: optimize images and store them on the cloud using Cloudinary 
+👉 **Image Management**: optimize images and store them on the cloud using Cloudinary 
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
